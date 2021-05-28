@@ -39,31 +39,16 @@ class CreatureController extends AbstractController
 
     /**
      * @Route("/creature/create", name="app_creature_create")
-     */
-    public function create(EntityManagerInterface $em, Request $request)
-    {
-        $creature = new Creature();
-        $form = $this->createForm(CreatureAddType::class, $creature);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($creature);
-            $em->flush();
-
-            return $this->redirectToRoute('app_creature_index');
-        }
-
-        return $this->render('creature/create.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/creature/{id<\d+>}/update", name="app_creature_update")
      */
-    public function update(Creature $creature, Request $request, EntityManagerInterface $em)
+    public function update(Creature $creature = null, Request $request, EntityManagerInterface $em)
     {
-        $form = $this->createForm(CreatureAddType::class, $creature);
+        if (!$creature) {
+            $form = $this->createForm(CreatureAddType::class);
+            $creature = new Creature();
+        } else {
+            $form = $this->createForm(CreatureAddType::class, $creature);
+        }
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -76,6 +61,7 @@ class CreatureController extends AbstractController
         return $this->render('creature/update.html.twig', [
             'creature' => $creature,
             'form' => $form->createView(),
+            'isModification' => null !== $creature->getId(),
         ]);
     }
 }

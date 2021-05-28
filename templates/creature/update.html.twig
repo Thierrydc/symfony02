@@ -1,9 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ form_start(form)}}
-        {{ form_widget(form) }}
-    
-    <input type="submit" class="btn" value="Envoyer">
-    {{ form_end(form) }}
+{% if isModification %}
+    <h1>Modification de {{ creature.nom }}</h1>
+{% else %}
+    <h1>Ajout de créature</h1>
+{% endif %}
+
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-6">
+                {{ form_start(form)}}
+                    {{ form_widget(form) }}
+                <input type="submit" class="btn btn-primary" value="Envoyer">
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
