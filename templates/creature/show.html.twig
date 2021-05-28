@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="show" class="container">
+        <div class="row">
+            <div class="mb-2">
+                <h3 class="card-title"><a href="#">{{creature.nom}}</a></h3>
+                <img src="{{asset('assets/images/' ~ creature.image)}}" alt="">
+                <a href="{{ path('app_creature_update',{id:creature.id}) }}">Modifier</a>
+                <p>{{creature.description}}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Liste des créatures</h1>
+<div class="container">
+    <div class="row">
+    {% for creature in creatures %}
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow" style="width: 18rem;">
+               
+                <img class="card-img-top" src="./assets/images/{{creature.image}}" alt="">
+                <div class="card-body">
+                    <h3 class="card-title"><a href="#">{{creature.nom}}</a></h3>
+                    <a href="{{path('app_creature_show', {id:creature.id})}}" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    
+</div>
+{% endblock %}
