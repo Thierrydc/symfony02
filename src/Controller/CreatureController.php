@@ -50,7 +50,7 @@ class CreatureController extends AbstractController
             $form = $this->createForm(CreatureAddType::class, $creature);
         }
 
-        $form->handleRequest($request);
+        $form->handleRequest($request);git 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($creature);
             $em->flush();
